@@ -5,8 +5,13 @@ Currently, this app developed by 3 Teaching Assistants at
 Bina Nusantara University with the initial AL19-1, NH19-1, and SL19-1 under the guidance of DL18-2.
 
 ## Features
+To Be filled
 
 ## How to use
+To Be filled
+
+
+
 
 # ALERT
 If you want to help develop this app, please read this article for better code style.
