@@ -19,3 +19,5 @@ Please Install
     https://github.com/tesseract-ocr/tesseract/wiki
 9. Graphql-Upload
     npm install --save graphql-upload
+
+Also Please Input data on nodemon-example.json and rename it into nodemon.json
