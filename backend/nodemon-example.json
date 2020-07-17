@@ -1,0 +1,10 @@
+{
+    "env" : {
+        "PORT": 8989,
+        "HOST": "",
+        "MYSQL_USERNAME": "",
+        "MYSQL_PASSWORD": "",
+        "MYSQL_DATABASE": "",
+        "JWT_KEY": ""
+    }
+}
