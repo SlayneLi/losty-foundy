@@ -19,11 +19,13 @@ const ItemType = `
     }
 `;
 const ItemQuery = `
-    items: [Item!]!
+    items(filterId: String, skip: Int, take: Int): [Item!]!
 `;
 
 const ItemMutation = `
     insertItem(itemInput: ItemInput!): Item
+    deleteItem(ID: String!) : Item
+    updateItem(ID: String!, itemInput: ItemInput, takerId: Int) : Item
 `;
 
 module.exports = {

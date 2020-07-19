@@ -1,8 +1,6 @@
 const connection = require('../db')
 const {Sequelize} = require('sequelize');
 
-const Item = require('./Item');
-
 const User = connection.define('user',{
     ID:{
         type: Sequelize.INTEGER,

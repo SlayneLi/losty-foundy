@@ -1,8 +1,6 @@
 const connection = require('../db')
 const {Sequelize} = require('sequelize');
 
-const Item = require('./Item');
-
 const Taker = connection.define('taker',{
     ID:{
         type: Sequelize.STRING,
@@ -22,6 +20,8 @@ const Taker = connection.define('taker',{
         allowNull: true
     }
 },{paranoid:true});
+
+// Taker.associate
 
 Taker.sync();
 

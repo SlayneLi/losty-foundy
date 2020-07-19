@@ -48,19 +48,23 @@ const Item = connection.define('item',{
     }
 },{paranoid: true});
 
-// Item.belongsTo(Sequelize.User, {
-//     as: 'User',
-//     foreignKey: 'UserID'
-// });
+// Item.associate = (models) =>{
+//     Item.belongsTo(models.user, {foreignKey: 'ID', as: 'User'})
+//     Item.belongsTo(models.taker, {foreignKey: 'ID', as: 'Taker'})
+// }
 
-// Item.belongsTo(Sequelize.Taker, {
-//     as: 'Taker',
-//     foreignKey: 'TakerID'
-// });
 
-// User.hasMany(Item, {foreignKey: 'UserID'});
+Item.belongsTo(User, {
+    foreignKey: 'UserID'
+});
 
-// Taker.hasMany(Item, {foreignKey: 'TakerID'});
+Item.belongsTo(Taker, {
+    foreignKey: 'TakerID'
+});
+
+User.hasMany(Item, {foreignKey: 'UserID'});
+
+Taker.hasMany(Item, {foreignKey: 'TakerID'});
 
 Item.sync();
 
