@@ -2,19 +2,25 @@ const { buildSchema } = require('graphql')
 const {UserType, UserQuery, UserMutation } = require('./UserSchema');
 const {ItemType, ItemQuery, ItemMutation } = require('./ItemSchema');
 const {TakerType, TakerQuery, TakerMutation }  = require('./TakerSchema');
-const {PhotoType, PhotoQuery, PhotoMutation} = require('./PhotoSchema')
+const {PhotoType, PhotoQuery, PhotoMutation} = require('./PhotoSchema');
+const {CardType, CardQuery, CardMutation} = require('./CardSchema');
+const {TapType, TapQuery, TapMutation} = require('./TapSchema');
 
 module.exports = buildSchema( 
     UserType + 
     ItemType +
     TakerType +
-    PhotoType +`
+    PhotoType +
+    CardType +
+    TapType +`
 
     type RootQuery{`+ 
         UserQuery +
         ItemQuery +
         TakerQuery +
         PhotoQuery +
+        CardQuery +
+        TapQuery +
     `}
 
     type RootMutation{`+
@@ -22,6 +28,8 @@ module.exports = buildSchema(
         ItemMutation +
         TakerMutation +
         PhotoMutation + 
+        CardMutation +
+        TapMutation +
     `}
 
     schema {

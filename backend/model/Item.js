@@ -36,7 +36,7 @@ const Item = connection.define('item',{
     },
     PCNumber:{
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     FoundDate:{
         type: Sequelize.DATE,
@@ -44,6 +44,10 @@ const Item = connection.define('item',{
     },
     FoundShift:{
         type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    ItemImage:{
+        type: Sequelize.STRING,
         allowNull: false
     }
 },{paranoid: true});

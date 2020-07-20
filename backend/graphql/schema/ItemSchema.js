@@ -5,27 +5,29 @@ const ItemType = `
         taker: Taker,
         ItemName: String!,
         RoomFound: String!,
-        PCNumber: Int!,
+        PCNumber: Int,
         FoundDate: String!,
-        FoundShift: Int!
+        FoundShift: Int!,
+        ItemImage: String!
     }
 
     input ItemInput{
         ItemName: String!,
         RoomFound: String!,
-        PCNumber: Int!,
+        PCNumber: Int,
         FoundDate: String!,
-        FoundShift: Int!
+        FoundShift: Int!,
+        ItemImage: String!
     }
 `;
 const ItemQuery = `
-    items(filterId: String, skip: Int, take: Int): [Item!]!
+    items(filterName: String, skip: Int, take: Int): [Item!]!
 `;
 
 const ItemMutation = `
     insertItem(itemInput: ItemInput!): Item
-    deleteItem(ID: String!) : Item
-    updateItem(ID: String!, itemInput: ItemInput, takerId: Int) : Item
+    deleteItem(ID: String!) : Boolean
+    updateItem(ID: String!, itemInput: ItemInput, takerId: String) : Item
 `;
 
 module.exports = {

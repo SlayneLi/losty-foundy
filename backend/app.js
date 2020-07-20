@@ -11,7 +11,13 @@ const {graphqlUploadExpress, GraphQLUpload} = require('graphql-upload');
 
 const app = express();
 
-app.use(bodyParser.json()); 
+app.use(bodyParser.json({
+    limit: '50mb', extended: true
+})); 
+
+app.use(bodyParser.urlencoded({
+    limit: '50mb', extended: true
+}))
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', "*");
@@ -47,10 +53,20 @@ try {
 //     psm: 3,
 // }
 
+// const char_count = (str, letter) => {
+//     var letter_Count = 0;
+//     for (var position = 0; position < str.length; position++) {
+//         if (str.charAt(position) == letter) {
+//             letter_Count += 1;
+//         }
+//     }
+//     return letter_Count;
+// }
+
 // const tesseract = require("node-tesseract-ocr");
-// tesseract.recognize('./images/7832.jpg', config)
+// tesseract.recognize('./images/takers/20-6-2020_14-24-27.png', config)
 //     .then(text => {
-//         // console.log("Result:", text);
+//         console.log("Result:", text);
 //         const PhotoOutput = {
 //             ID: "asd",
 //             Name: ""
@@ -65,6 +81,7 @@ try {
 
 //                 PhotoOutput.ID = PhotoOutput.ID.replace(/e/g, "2")
 //                 PhotoOutput.ID = PhotoOutput.ID.replace(/c/g, "2")
+//                 PhotoOutput.ID = PhotoOutput.ID.replace(/(\r\n|\n|\r|\t|\f)/gm, "").trim()
 
 //                 console.log("Hasil id:")
 //                 console.log(PhotoOutput.ID)
@@ -80,6 +97,7 @@ try {
 //                     }
 //                 }
 //                 PhotoOutput.Name = PhotoOutput.Name.substr(0, PhotoOutput.Name.indexOf('\n'))
+//                 PhotoOutput.Name = PhotoOutput.Name.replace(/(\r\n|\n|\r|\t|\f)/gm, "").trim()
 //                 console.log("Hasil name:")
 //                 console.log(PhotoOutput.Name)
 //             } else {
@@ -88,6 +106,7 @@ try {
 
 //                 PhotoOutput.ID = PhotoOutput.ID.replace(/e/g, "2")
 //                 PhotoOutput.ID = PhotoOutput.ID.replace(/c/g, "2")
+//                 PhotoOutput.ID = PhotoOutput.ID.replace(/(\r\n|\n|\r|\t|\f)/gm, "").trim()
 
 //                 console.log("Hasil id:")
 //                 console.log(PhotoOutput.ID)
@@ -103,40 +122,69 @@ try {
 //                     }
 //                 }
 //                 PhotoOutput.Name = PhotoOutput.Name.substr(0, PhotoOutput.Name.indexOf('\n'))
+//                 PhotoOutput.Name = PhotoOutput.Name.replace(/(\r\n|\n|\r|\t|\f)/gm, "").trim()
 //                 console.log("Hasil name:")
 //                 console.log(PhotoOutput.Name)
 //             }
 //             // if ()
 //         } else if (text.includes("/")) {
 //             // NIM
-//             PhotoOutput.ID = text.substr(text.indexOf("/"))
+//             if (char_count(text, '/') == 3) {
 
-//             PhotoOutput.ID = PhotoOutput.ID.substr(PhotoOutput.ID.indexOf("N"))
+//                 PhotoOutput.ID = text.substr(text.indexOf("/"))
 
-//             PhotoOutput.ID = PhotoOutput.ID.substr(12)
+//                 PhotoOutput.ID = PhotoOutput.ID.substr(PhotoOutput.ID.indexOf("N"))
 
-//             PhotoOutput.ID = PhotoOutput.ID.substr(0, 10)
-//             console.log("Hasil id:")
-//             console.log(PhotoOutput.ID)
+//                 PhotoOutput.ID = PhotoOutput.ID.substr(12)
 
-//             PhotoOutput.Name = text.substr(text.indexOf('\n'))
-//             PhotoOutput.Name = PhotoOutput.Name.substr(0, PhotoOutput.Name.indexOf('e'))
-//             PhotoOutput.Name = PhotoOutput.Name.replace(/\n/g, "")
-//             PhotoOutput.Name = PhotoOutput.Name.substr(0, PhotoOutput.Name.length - 2)
-//             console.log("Hasil Name:")
-//             console.log(PhotoOutput.Name)
+//                 PhotoOutput.ID = PhotoOutput.ID.substr(0, 10)
+//                 console.log("Hasil id:")
+//                 console.log(PhotoOutput.ID)
+
+//                 PhotoOutput.Name = text.substr(text.indexOf('\n'))
+//                 PhotoOutput.Name = PhotoOutput.Name.substr(0, PhotoOutput.Name.indexOf('e'))
+//                 PhotoOutput.Name = PhotoOutput.Name.replace(/\n/g, "")
+//                 PhotoOutput.Name = PhotoOutput.Name.substr(0, PhotoOutput.Name.length - 2)
+//                 console.log("Hasil Name:")
+//                 console.log(PhotoOutput.Name)
+//             } else {
+//                 PhotoOutput.ID = text.substr(text.indexOf('/'))
+//                 PhotoOutput.ID = PhotoOutput.ID.substr(2, 12)
+//                 PhotoOutput.ID = PhotoOutput.ID.replace(/(\r\n|\n|\r|\t|\f)/gm, "").trim()
+
+//                 console.log("Hasil ID:")
+//                 console.log(PhotoOutput.ID)
+
+//                 PhotoOutput.Name = text.substr(text.indexOf('\n'))
+//                 PhotoOutput.Name = PhotoOutput.Name.replace('\n', "")
+//                 PhotoOutput.Name = PhotoOutput.Name.replace('\n', "")
+//                 PhotoOutput.Name = PhotoOutput.Name.substr(0, PhotoOutput.Name.indexOf('\n'))
+//                 PhotoOutput.Name = PhotoOutput.Name.replace(/(\r\n|\n|\r|\t|\f)/gm, "").trim()
+//                 console.log("Hasil Name:")
+//                 console.log(PhotoOutput.Name)
+//             }
 
 
 //         } else {
 //             // BN
-//             PhotoOutput.Name = text.substr(0, text.indexOf('\n'))
-//             PhotoOutput.ID = text.substr(text.indexOf('\n') + 1, text.length)
-//             PhotoOutput.ID = PhotoOutput.ID.replace(/O/g, 0)
-//             console.log(PhotoOutput.Name)
-//             console.log(PhotoOutput.ID)
-//         }
+//             text = text.replace(/(\r\n|\n|\r|\t|\f)/gm, "").trim()
+//             console.log(text)
+//             for (i = 0; i < text.length; i++) {
+//                 if (text.charAt(i) == 'B' && text.charAt(i + 1) == 'N') {
+//                     PhotoOutput.Name = text.substr(0, i)
+//                     PhotoOutput.ID = text.substr(i, text.length)
+//                 }
+//             }
+//             // PhotoOutput.Name = text.replace(/(\r\n|\n|\r|\t|\f)/gm, "")
+//             // PhotoOutput.Name = text.substr(0, text.indexOf('\n'))
+//             // PhotoOutput.ID = text.substr(text.indexOf('\n') + 1, text.length)
+//             // PhotoOutput.ID = PhotoOutput.ID.replace(/O/g, 0)
 
-//         return PhotoOutput;
+//             console.log("Hasil id:")
+//             console.log(PhotoOutput.ID)
+//             console.log("Hasil name:")
+//             console.log(PhotoOutput.Name)
+//         }
 //     })
 //     .catch(error => {
 //         console.log(error.message);

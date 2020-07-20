@@ -1,6 +1,4 @@
 const PhotoType = `
-    scalar Upload
-
     type PhotoOutput{
         ID: String,
         Name: String,
@@ -10,7 +8,7 @@ const PhotoType = `
 const PhotoQuery = ``;
 
 const PhotoMutation = `
-    readPhoto(photo: Upload!, type: String!): PhotoOutput!
+    readPhoto(photo: String!): PhotoOutput!
 `;
 
 module.exports = {
