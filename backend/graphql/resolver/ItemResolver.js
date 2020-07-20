@@ -56,8 +56,8 @@ module.exports = {
         return true;
     },
     updateItem: async(args, req) =>{
-        // if(!req.isAuth)
-        //     throw new Error('Unauthenticated');
+        if(!req.isAuth)
+            throw new Error('Unauthenticated');
         var item = await Item.findOne({
             where: {
                 ID: args.ID

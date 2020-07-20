@@ -3,8 +3,8 @@ const Taker = require('../../model/Taker');
 module.exports = {
     takers: async () => Taker.findAll(),
     insertTaker: async (args, req) =>{
-        // if(!req.isAuth)
-        //     throw new Error('Unauthenticated');
+        if(!req.isAuth)
+            throw new Error('Unauthenticated');
         return Taker.findOne({
                 where:{
                     ID: args.takerInput.ID
