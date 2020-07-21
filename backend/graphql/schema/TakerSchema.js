@@ -18,7 +18,7 @@ const TakerType = `
 `;
 
 const TakerQuery = `
-    takers: [Taker!]!
+    takers(filterId: String, skip: Int, take: Int): [Taker!]!
 `;
 
 const TakerMutation = `

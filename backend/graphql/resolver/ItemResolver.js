@@ -6,7 +6,7 @@ const {imageToBase64, saveBase64toFile} = require('../../middleware/ImageConvert
 
 module.exports = {
     items: async (args) => {
-        const where = args.filterId ? {ItemName: args.filterName} : {}
+        const where = args.filterName ? {ItemName: args.filterName} : {}
         var items = await Item.findAll({
             include: [User,Taker],
             order:[['FoundDate','DESC']],
@@ -15,7 +15,13 @@ module.exports = {
             limit: args.take
         });
         await items.forEach(async item => {
+            // console.log(item.get("taker").get("TakerImage"))
             item.ItemImage = await imageToBase64(item.ItemImage);
+            if(item.taker !== null && item.taker !== undefined){
+                if(item.taker.TakerImage !== null && item.taker.TakerImage !== undefined){
+                    item.taker.TakerImage = await imageToBase64(item.taker.TakerImage);
+                }
+            }
         });
         return items;
     },

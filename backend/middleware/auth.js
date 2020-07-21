@@ -6,16 +6,9 @@ module.exports = (req, res, next) =>{
         req.isAuth = false;
         return next();
     }
-
-    const token = authHeader.split(' ')[1];
-    if(!token || token ===''){
-        req.isAuth = false;
-        return next();
-    }
-    console.log(token);
     let decodedToken;
     try {
-        decodedToken = jwt.verify(token, process.env.JWT_KEY);
+        decodedToken = jwt.verify(authHeader, process.env.JWT_KEY);
     } catch (error) {
         req.isAuth = false;
         return next();
@@ -24,7 +17,6 @@ module.exports = (req, res, next) =>{
         req.isAuth = false;
         return next();
     }
-
     req.isAuth = true;
     req.userID = decodedToken.userId;
     next();

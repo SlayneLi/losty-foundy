@@ -7,7 +7,7 @@ const graphiqlSchema = require('./graphql/schema/Schema');
 const graphqlResolver = require('./graphql/resolver/Resolver');
 const isAuth = require('./middleware/auth');
 
-const {graphqlUploadExpress, GraphQLUpload} = require('graphql-upload');
+const expressPlayground = require('graphql-playground-middleware-express').default
 
 const app = express();
 
@@ -31,12 +31,13 @@ app.use((req, res, next) => {
 app.use(isAuth);
 
 app.use('/graphql',
-    graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 1 }),
     graphqlHttp({
     schema: graphiqlSchema,
     rootValue: graphqlResolver,
     graphiql: true
 }));
+
+app.get('/playground', expressPlayground({ endpoint: '/graphql' }))
 
 try {
     connection.authenticate();
@@ -64,7 +65,7 @@ try {
 // }
 
 // const tesseract = require("node-tesseract-ocr");
-// tesseract.recognize('./images/takers/20-6-2020_14-24-27.png', config)
+// tesseract.recognize('./images/takers/7891.jpg', config)
 //     .then(text => {
 //         console.log("Result:", text);
 //         const PhotoOutput = {

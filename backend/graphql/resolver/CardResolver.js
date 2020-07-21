@@ -10,7 +10,6 @@ module.exports = {
                 ID: args.cardID
             }
         }).then(card =>{
-            console.log(card);
             if(card)
                 return card;
             return Card.create({

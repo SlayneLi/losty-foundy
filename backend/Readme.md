@@ -17,7 +17,7 @@ Please Install
     npm install --save node-tesseract-ocr
     also install tesseract:
     https://github.com/tesseract-ocr/tesseract/wiki
-9. Graphql-Upload
-    npm install --save graphql-upload
+9. Graphql-Playground
+    npm install graphql-playground-middleware-express --save
 
 Also Please Input data on nodemon-example.json and rename it into nodemon.json

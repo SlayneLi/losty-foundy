@@ -12,7 +12,6 @@ module.exports ={
                     UserName: args.userInput.username
                 }
             }).then(user=>{
-            console.log(user)
             if(user)
                 throw new Error('UserName Exists!');
             return bcrypt.hash(args.userInput.password,12)

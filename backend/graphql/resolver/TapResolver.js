@@ -13,12 +13,14 @@ module.exports = {
         });
     },
     insertTap: async(args)=>{
-        console.log("a")
         return Tap.create({ 
             CardID: args.cardId
         }).then(res =>{
-            console.log(res);
-            return res;
+            return Tap.findOne({
+                where:{
+                    ID: res.ID
+                },include:[Card]
+            })
         });
     }
 }
